@@ -6,7 +6,7 @@ import numpy as np
 import tempfile
 import shutil
 import replicate
-import Levenshtein  # pip install python-levenshtein
+import Levenshtein 
 import torch.nn as nn
 import mediapipe as mp
 from contextlib import asynccontextmanager
@@ -14,16 +14,38 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from fastapi import FastAPI, HTTPException, Body, Query, File, UploadFile, Form
 from pydantic import BaseModel
 from typing import List, Dict, Optional
-from dotenv import load_dotenv # pip install python-dotenv
+from dotenv import load_dotenv 
 
-# 0. 환경 변수 로드 (보안)
-load_dotenv()  # .env 파일에서 REPLICATE_API_TOKEN을 불러옵니다.
+# 0. 환경 변수 로드
+load_dotenv()
 
 # ==========================================================
-# 1. 데이터 모델 (요청 및 응답 정의) - Swagger 표시용
+# [설정] 매핑 정보 (비디오/JSON용 + 오디오용)
 # ==========================================================
 
-# [요청] 랜드마크 데이터
+# 1. 비디오/JSON 분석용 (모델 & 기준파일)
+CKPT_PATH_MAP = {
+    "korean": "ckpt_korean.pt",
+    "read": "ckpt_read.pt",
+    "bab": "ckpt_bab.pt",
+}
+
+REF_FILES_MAP = {
+    "korean": "refpack_korean.npz",
+    "read": "refpack_read.npz", 
+    "bab": "refpack_bab.npz"
+}
+
+# 2. [New] 오디오 분석용 (Key -> 실제 정답 텍스트)
+TARGET_TEXT_MAP = {
+    "korean": "한국어",
+    "read": "읽어요",
+    "bab": "볶음밥",
+}
+
+# ==========================================================
+# 1. 데이터 모델
+# ==========================================================
 class LandmarkPos(BaseModel):
     x: float; y: float; z: float
 
@@ -31,19 +53,65 @@ class FaceTrackingData(BaseModel):
     seg_key: str; label: str; frame_idx: int; time_sec: float
     landmarks: Dict[str, LandmarkPos]
 
-# [응답] 분석 결과 (Swagger에 이 구조가 그대로 뜸)
 class AnalysisResult(BaseModel):
     status: str
-    target_word: str
-    label_in_file: Optional[str] = None
+    target_word: str                 # 클라이언트가 보낸 키 (예: "korean")
+    label_in_file: Optional[str] = None # 실제 매핑된 값 (예: "한국어")
     similarity: Optional[float] = None
     score: float
     passed: bool
     top_error_landmarks: Optional[List[int]] = []
-    recognized_text: Optional[str] = None  # 오디오 분석용
+    recognized_text: Optional[str] = None 
 
 # ==========================================================
-# 2. 모델 아키텍처 & 유틸리티
+# 2. 오디오 평가 함수 (순수 로직)
+# ==========================================================
+def process_audio_scoring(audio_path: str, target_text: str) -> dict:
+    if not os.getenv("REPLICATE_API_TOKEN"):
+        raise RuntimeError("REPLICATE_API_TOKEN is missing in .env file")
+
+    try:
+        # [수정됨] 파일을 with 문으로 열어서, 사용 후 즉시 닫히도록 보장함 (WinError 32 해결 핵심)
+        with open(audio_path, "rb") as audio_file:
+            output = replicate.run(
+                "openai/whisper:8099696689d249cf8b122d833c36ac3f75505c666a395ca40ef26f68e7d3d16e",
+                input={
+                    "audio": audio_file,  # 열린 파일 핸들 전달
+                    "language": "ko", 
+                    "model": "large-v3"
+                }
+            )
+        # with 블록을 나오면 파일이 자동으로 닫힘 -> os.remove 가능해짐
+        
+        pred_text = output.get("transcription", "") if isinstance(output, dict) else str(output)
+        
+    except Exception as e:
+        print(f"Replicate Error: {e}")
+        return {"status": "error", "message": str(e), "score": 0.0, "passed": False}
+
+    # ... (아래 점수 계산 로직은 그대로 유지) ...
+    def clean(s): return str(s).replace(" ", "").strip()
+    ref_clean = clean(target_text)
+    pred_clean = clean(pred_text)
+    
+    if len(ref_clean) == 0:
+        cer = 1.0 if len(pred_clean) > 0 else 0.0
+    else:
+        dist = Levenshtein.distance(ref_clean, pred_clean)
+        cer = dist / len(ref_clean)
+    
+    score = max(0.0, (1.0 - cer) * 100.0)
+    
+    return {
+        "status": "success",
+        "target_word": target_text,
+        "recognized_text": pred_text,
+        "score": round(score, 2),
+        "passed": score >= 80.0
+    }
+
+# ==========================================================
+# 3. 입모양 모델 아키텍처 & 유틸
 # ==========================================================
 class EncoderAttn(nn.Module):
     def __init__(self, d_in, h=256, layers=2, drop=0.3, attn_dim=128):
@@ -88,106 +156,129 @@ def dtw_diff(seq_q, seq_ref, std=None):
     return diffs
 
 # ==========================================================
-# 3. 통합 엔진 (비디오 + JSON + 오디오)
+# 4. 멀티 모델 엔진
 # ==========================================================
-class UnifiedEvaluator:
-    def __init__(self, ckpt_path, ref_files: Dict[str, str], device="cpu"):
+class MultiModelEvaluator:
+    def __init__(self, ckpt_map: Dict[str, str], ref_map: Dict[str, str], device="cpu"):
         self.device = device
-        print(f"[Init] Loading Model: {ckpt_path}")
+        self.engines = {}
         
-        # 입모양 모델 로드
-        ck = torch.load(ckpt_path, map_location=device, weights_only=False)
-        self.model = EncoderAttn(ck["feat_dim"], ck["hidden"], ck["layers"], attn_dim=ck["attn_dim"])
-        self.model.load_state_dict(ck["state"]); self.model.to(device).eval()
-        
-        self.mean = ck["mean"]; self.std = ck["std"]; self.std_raw = ck["std_raw"]
-        self.use_delta = ck["use_delta"]; self.lip_indices = ck.get("lip_indices")
-        self.idx_61 = self.lip_indices.index(61); self.idx_291 = self.lip_indices.index(291)
-
-        # 레퍼런스 파일들 로드
-        self.refs = {}
-        for key, path in ref_files.items():
-            if os.path.exists(path):
-                rf = np.load(path)
-                # 파일 구조 유연하게 처리 (단일/멀티 키)
-                if f"{key}_proto" in rf:
-                    self.refs[key] = {"proto": rf[f"{key}_proto"], "rep_seq": rf[f"{key}_rep_seq"], "label": key}
-                elif "proto" in rf:
-                    self.refs[key] = {"proto": rf["proto"], "rep_seq": rf["rep_seq"], "label": str(rf["label"])}
-                print(f"   ✅ Loaded Reference: {key}")
-
-        # 비디오 처리용 MediaPipe
+        print("[Init] Loading Models & References...")
         self.mp_face_mesh = mp.solutions.face_mesh.FaceMesh(
             static_image_mode=False, max_num_faces=1, refine_landmarks=False, min_detection_confidence=0.3
         )
 
-    # --- [A] 비디오 처리 ---
+        targets = set(ckpt_map.keys()).intersection(set(ref_map.keys()))
+        
+        for key in targets:
+            c_path = ckpt_map[key]
+            r_path = ref_map[key]
+            
+            if not os.path.exists(c_path) or not os.path.exists(r_path):
+                print(f"   ⚠️  Files missing for '{key}' (Skip)")
+                continue
+                
+            try:
+                ck = torch.load(c_path, map_location=device, weights_only=False)
+                model = EncoderAttn(ck["feat_dim"], ck["hidden"], ck["layers"], attn_dim=ck["attn_dim"])
+                model.load_state_dict(ck["state"]); model.to(device).eval()
+                
+                rf = np.load(r_path)
+                if f"{key}_proto" in rf:
+                    proto = rf[f"{key}_proto"]; rep_seq = rf[f"{key}_rep_seq"]; label = str(key)
+                else:
+                    proto = rf["proto"]; rep_seq = rf["rep_seq"]; label = str(rf["label"]) if "label" in rf else key
+
+                self.engines[key] = {
+                    "model": model, "proto": proto, "rep_seq": rep_seq, "label": label,
+                    "mean": ck["mean"], "std": ck["std"], "std_raw": ck["std_raw"], "use_delta": ck["use_delta"],
+                    "lip_indices": ck.get("lip_indices"),
+                    "idx_61": ck.get("lip_indices").index(61), "idx_291": ck.get("lip_indices").index(291)
+                }
+                print(f"   ✅ Loaded Target '{key}'")
+            except Exception as e:
+                print(f"   ❌ Error loading '{key}': {e}")
+                
     def process_video(self, video_path):
+        if not self.engines: return None
+        first_key = list(self.engines.keys())[0]
+        target_indices = self.engines[first_key]["lip_indices"]
+        idx_61 = self.engines[first_key]["idx_61"]
+        idx_291 = self.engines[first_key]["idx_291"]
+        
         cap = cv2.VideoCapture(video_path)
         seq = []
-        while True:
-            ret, frame = cap.read()
-            if not ret: break
-            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            res = self.mp_face_mesh.process(rgb)
-            if res.multi_face_landmarks:
-                lm = res.multi_face_landmarks[0].landmark
-                all_xyz = np.array([[p.x, p.y, p.z] for p in lm], dtype=np.float32)
-                if all_xyz.shape[0] >= 468:
-                    pts = all_xyz[self.lip_indices]
-                    seq.append(normalize_points_dynamic(pts, self.idx_61, self.idx_291))
-            else:
-                if seq: seq.append(seq[-1])
-        cap.release()
+        
+        try:  # [수정됨] try-finally 구문 추가
+            while True:
+                ret, frame = cap.read()
+                if not ret: break
+                rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                res = self.mp_face_mesh.process(rgb)
+                if res.multi_face_landmarks:
+                    lm = res.multi_face_landmarks[0].landmark
+                    all_xyz = np.array([[p.x, p.y, p.z] for p in lm], dtype=np.float32)
+                    if all_xyz.shape[0] >= 468:
+                        pts = all_xyz[target_indices]
+                        seq.append(normalize_points_dynamic(pts, idx_61, idx_291))
+                else:
+                    if seq: seq.append(seq[-1])
+        finally:
+            # [수정됨] 중간에 에러가 나도 무조건 파일을 놓아주도록 함
+            cap.release()
+            
         return np.array(seq, dtype=np.float32) if seq else None
 
-    # --- [B] JSON 처리 ---
-    def process_json(self, data_list: List[FaceTrackingData]):
+    def process_json(self, data_list: List[FaceTrackingData], target_key: str):
+        if target_key not in self.engines: return None
+        eng = self.engines[target_key]
+        
         seq = []
         for frame in data_list:
             lms = frame.landmarks
             if not lms: continue
             pts = []
             valid = True
-            for idx in self.lip_indices:
+            for idx in eng["lip_indices"]:
                 key = str(idx)
                 if key not in lms: valid = False; break
                 pts.append([lms[key].x, lms[key].y, lms[key].z])
             if valid:
                 pts_arr = np.array(pts, dtype=np.float32)
-                seq.append(normalize_points_dynamic(pts_arr, self.idx_61, self.idx_291))
+                seq.append(normalize_points_dynamic(pts_arr, eng["idx_61"], eng["idx_291"]))
         return np.array(seq, dtype=np.float32) if seq else None
 
-    # --- [C] 입모양 평가 로직 ---
     def evaluate_lip(self, seq, target_key: str):
-        if target_key not in self.refs:
-             # 테스트를 위해 파일이 없어도 'korean' 데이터로 강제 매핑 (임시)
-             # 실제 배포시에는 에러를 띄우거나 정확한 파일 필요
-             if 'korean' in self.refs: ref_data = self.refs['korean'] 
-             else: return {"status": "error", "message": "Ref not found"}
-        else:
-            ref_data = self.refs[target_key]
-
+        if target_key not in self.engines:
+            return {"status": "error", "message": f"Target '{target_key}' not loaded."}
+        
+        eng = self.engines[target_key]
         if seq is None or len(seq) < 5:
-            return {"status": "fail", "message": "Video/Data too short"}
+            return {"status": "fail", "message": "Input too short"}
 
         x = flatten_xyz(seq)
-        if self.use_delta: x = add_delta(x)
-        x = (x - self.mean) / (self.std + 1e-6)
+        if eng["use_delta"]: x = add_delta(x)
+        x = (x - eng["mean"]) / (eng["std"] + 1e-6)
+        
         xt = torch.from_numpy(x).unsqueeze(0).to(self.device)
         lt = torch.tensor([x.shape[0]]).to(self.device)
         
         with torch.no_grad():
-            z, alphas = self.model.forward_embed(xt, lt, return_alpha=True)
+            z, alphas = eng["model"].forward_embed(xt, lt, return_alpha=True)
             z = z.cpu().numpy()[0]; alpha = alphas[0].cpu().numpy()
 
         nz = z / (np.linalg.norm(z)+1e-9)
-        np_ = ref_data["proto"] / (np.linalg.norm(ref_data["proto"])+1e-9)
+        np_ = eng["proto"] / (np.linalg.norm(eng["proto"])+1e-9)
         cos_sim = float(nz @ np_)
         
-        score = max(0.0, min(100.0, (cos_sim - 0.92) / (0.99 - 0.92) * 100.0)) if cos_sim >= 0.92 else 0.0
+        # 개선된 점수 계산 (DTW 반영)
+        diffs = dtw_diff(seq, eng["rep_seq"], std=eng["std_raw"])
+        mean_diff = diffs.mean()
+        
+        penalty = max(0.0, (mean_diff - 1.5) * 20.0) # Penalty logic
+        base_score = (cos_sim - 0.90) / (0.99 - 0.90) * 100.0
+        score = max(0.0, min(100.0, base_score - penalty))
 
-        diffs = dtw_diff(seq, ref_data["rep_seq"], std=self.std_raw)
         alpha_np = alpha[:, None]
         point_scores = (diffs * alpha_np).sum(axis=0) / (alpha_np.sum() + 1e-9)
         top_errors = np.argsort(-point_scores)[:5]
@@ -195,143 +286,99 @@ class UnifiedEvaluator:
         return {
             "status": "success",
             "target_word": target_key,
-            "label_in_file": ref_data["label"],
+            "label_in_file": eng["label"],
             "similarity": cos_sim,
             "score": round(score, 2),
             "passed": score >= 80.0,
-            "top_error_landmarks": [int(self.lip_indices[i]) for i in top_errors]
-        }
-    
-    # --- [D] 오디오 평가 (CER) ---
-    def evaluate_audio(self, audio_path, target_text):
-        # 1. Replicate Whisper 호출
-        try:
-            output = replicate.run(
-                "openai/whisper:8099696689d249cf8b122d833c36ac3f75505c666a395ca40ef26f68e7d3d16e",
-                input={"audio": open(audio_path, "rb"), "language": "ko"}
-            )
-            # output format check (Replicate 버전에 따라 다를 수 있음)
-            pred_text = output.get("transcription", "") if isinstance(output, dict) else str(output)
-        except Exception as e:
-            return {"status": "error", "message": f"Replicate Error: {str(e)}", "score": 0, "passed": False}
-
-        # 2. 공백 제거 및 전처리
-        def clean(s): return s.replace(" ", "").strip()
-        
-        ref_clean = clean(target_text)
-        pred_clean = clean(pred_text)
-        
-        # 3. CER 계산 (Levenshtein Distance / Len)
-        if len(ref_clean) == 0:
-            cer = 1.0 if len(pred_clean) > 0 else 0.0
-        else:
-            dist = Levenshtein.distance(ref_clean, pred_clean)
-            cer = dist / len(ref_clean)
-        
-        # 4. 점수 환산 (CER 0 -> 100점)
-        score = max(0.0, (1.0 - cer) * 100.0)
-        
-        return {
-            "status": "success",
-            "target_word": target_text,
-            "recognized_text": pred_text, # 인식된 원본 텍스트
-            "score": round(score, 2),
-            "passed": score >= 80.0 # 기준은 자유롭게 설정
+            "top_error_landmarks": [int(eng["lip_indices"][i]) for i in top_errors]
         }
 
-
 # ==========================================================
-# 4. FastAPI 앱
+# 5. FastAPI 앱 실행
 # ==========================================================
-CKPT_PATH = "ckpt.pt"
-# [임시] 모든 키를 refpack.npz로 연결 (테스트용)
-REF_FILES_MAP = {
-    "korean": "refpack.npz",
-    "read": "refpack.npz", 
-    "rice": "refpack.npz"
-}
-
 engine = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global engine
-    if os.path.exists(CKPT_PATH):
+    available = any(os.path.exists(p) for p in CKPT_PATH_MAP.values())
+    if available:
         try:
             device = "cuda" if torch.cuda.is_available() else "cpu"
-            engine = UnifiedEvaluator(CKPT_PATH, REF_FILES_MAP, device=device)
-            print("✅ Server Engine Ready!")
+            engine = MultiModelEvaluator(CKPT_PATH_MAP, REF_FILES_MAP, device=device)
+            print(f"✅ Server Ready! Targets: {list(engine.engines.keys())}")
         except Exception as e:
-            print(f"❌ Engine Init Error: {e}")
+            print(f"❌ Engine Error: {e}")
+    else:
+        print("⚠️ No model files. Lip analysis disabled.")
     yield
     if engine: engine.mp_face_mesh.close()
 
 app = FastAPI(lifespan=lifespan)
 
-# [1] 비디오 분석 (테스트용)
-@app.post("/analyze/video", response_model=AnalysisResult)
-async def analyze_video(
-    target: str = Query(..., description="Target word (korean, rice, read.)"),
+# [Endpoint] 오디오 (수정됨: Key -> Text 매핑 적용)
+@app.post("/analyze/audio", response_model=AnalysisResult)
+async def analyze_audio(
+    target: str = Form(..., description="Target Key (korean, read, bab)"),
     file: UploadFile = File(...)
 ):
-    if not engine: raise HTTPException(503, "Loading...")
+    # 1. Key 검증 및 텍스트 변환
+    if target not in TARGET_TEXT_MAP:
+        raise HTTPException(400, detail=f"Unknown target: '{target}'. Available: {list(TARGET_TEXT_MAP.keys())}")
+    
+    real_target_text = TARGET_TEXT_MAP[target]
+
+    # 2. 파일 저장 및 분석
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
+        shutil.copyfileobj(file.file, tmp); tmp_path = tmp.name
+    try:
+        res = process_audio_scoring(tmp_path, real_target_text)
+        if res["status"] == "error": raise HTTPException(500, res["message"])
+        
+        # 3. 응답 생성 (Key와 실제 텍스트 모두 포함)
+        return {
+            "status": "success",
+            "target_word": target,            # 클라이언트가 보낸 Key
+            "label_in_file": real_target_text, # 실제 채점된 한글 텍스트
+            "score": res["score"],
+            "passed": res["passed"],
+            "recognized_text": res["recognized_text"],
+            "similarity": 0.0,
+            "top_error_landmarks": []
+        }
+    except RuntimeError as e:
+        raise HTTPException(500, str(e))
+    finally:
+        if os.path.exists(tmp_path): os.remove(tmp_path)
+
+# [Endpoint] 비디오
+@app.post("/analyze/video", response_model=AnalysisResult)
+async def analyze_video(
+    target: str = Query(..., description="korean, read, bab"),
+    file: UploadFile = File(...)
+):
+    if not engine: raise HTTPException(503, "Video Engine not loaded")
     with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as tmp:
         shutil.copyfileobj(file.file, tmp); tmp_path = tmp.name
     try:
         seq = engine.process_video(tmp_path)
         res = engine.evaluate_lip(seq, target)
-        if res["status"] == "error": raise HTTPException(400, res["message"])
+        if res.get("status") == "error": raise HTTPException(400, res["message"])
         return res
     finally:
         if os.path.exists(tmp_path): os.remove(tmp_path)
 
-# [2] JSON 분석 (실서비스용)
+# [Endpoint] JSON
 @app.post("/analyze/json", response_model=AnalysisResult)
 async def analyze_json(
-    target: str = Query(..., description="Target word"),
+    target: str = Query(..., description="korean, read, bab"),
     data: List[FaceTrackingData] = Body(...)
 ):
-    if not engine: raise HTTPException(503, "Loading...")
-    seq = engine.process_json(data)
+    if not engine: raise HTTPException(503, "Engine not loaded")
+    seq = engine.process_json(data, target)
     res = engine.evaluate_lip(seq, target)
-    if res["status"] == "error": raise HTTPException(400, res["message"])
+    if res.get("status") == "error": raise HTTPException(400, res["message"])
     return res
-
-# [3] 오디오 분석 (New!)
-@app.post("/analyze/audio", response_model=AnalysisResult)
-async def analyze_audio(
-    target_text: str = Form(..., description="Expected text (e.g. 안녕하세요)"),
-    file: UploadFile = File(...)
-):
-    """
-    오디오 파일을 업로드하여 STT(Replicate) 후 발음 정확도(CER) 점수 반환
-    """
-    if not os.getenv("REPLICATE_API_TOKEN"):
-        raise HTTPException(500, "Server Error: Replicate API Token not configured.")
-
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
-        shutil.copyfileobj(file.file, tmp); tmp_path = tmp.name
-    
-    try:
-        # Replicate API 호출이 있으므로 약간의 시간이 소요됨
-        res = engine.evaluate_audio(tmp_path, target_text)
-        
-        if res["status"] == "error":
-            raise HTTPException(500, res["message"])
-            
-        # Pydantic 모델에 맞춰 불필요한 필드 채우기
-        return {
-            "status": "success",
-            "target_word": target_text,
-            "score": res["score"],
-            "passed": res["passed"],
-            "recognized_text": res["recognized_text"],
-            "label_in_file": target_text, # 오디오는 라벨과 타겟이 같음
-            "similarity": 0.0, # 오디오에는 해당 없음
-            "top_error_landmarks": [] # 오디오에는 해당 없음
-        }
-    finally:
-        if os.path.exists(tmp_path): os.remove(tmp_path)
 
 if __name__ == "__main__":
     import uvicorn
