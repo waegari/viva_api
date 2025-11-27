@@ -198,36 +198,6 @@ class MultiModelEvaluator:
                 print(f"   ✅ Loaded Target '{key}'")
             except Exception as e:
                 print(f"   ❌ Error loading '{key}': {e}")
-                
-    def process_video(self, video_path):
-        if not self.engines: return None
-        first_key = list(self.engines.keys())[0]
-        target_indices = self.engines[first_key]["lip_indices"]
-        idx_61 = self.engines[first_key]["idx_61"]
-        idx_291 = self.engines[first_key]["idx_291"]
-        
-        cap = cv2.VideoCapture(video_path)
-        seq = []
-        
-        try:  # [수정됨] try-finally 구문 추가
-            while True:
-                ret, frame = cap.read()
-                if not ret: break
-                rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                res = self.mp_face_mesh.process(rgb)
-                if res.multi_face_landmarks:
-                    lm = res.multi_face_landmarks[0].landmark
-                    all_xyz = np.array([[p.x, p.y, p.z] for p in lm], dtype=np.float32)
-                    if all_xyz.shape[0] >= 468:
-                        pts = all_xyz[target_indices]
-                        seq.append(normalize_points_dynamic(pts, idx_61, idx_291))
-                else:
-                    if seq: seq.append(seq[-1])
-        finally:
-            # [수정됨] 중간에 에러가 나도 무조건 파일을 놓아주도록 함
-            cap.release()
-            
-        return np.array(seq, dtype=np.float32) if seq else None
 
     def process_json(self, data_list: List[FaceTrackingData], target_key: str):
         if target_key not in self.engines: return None
@@ -348,23 +318,6 @@ async def analyze_audio(
         }
     except RuntimeError as e:
         raise HTTPException(500, str(e))
-    finally:
-        if os.path.exists(tmp_path): os.remove(tmp_path)
-
-# [Endpoint] 비디오
-@app.post("/analyze/video", response_model=AnalysisResult)
-async def analyze_video(
-    target: str = Query(..., description="korean, read, bab"),
-    file: UploadFile = File(...)
-):
-    if not engine: raise HTTPException(503, "Video Engine not loaded")
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as tmp:
-        shutil.copyfileobj(file.file, tmp); tmp_path = tmp.name
-    try:
-        seq = engine.process_video(tmp_path)
-        res = engine.evaluate_lip(seq, target)
-        if res.get("status") == "error": raise HTTPException(400, res["message"])
-        return res
     finally:
         if os.path.exists(tmp_path): os.remove(tmp_path)
 
