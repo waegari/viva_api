@@ -289,27 +289,21 @@ app = FastAPI(lifespan=lifespan)
 # [Endpoint] 오디오 (수정됨: Key -> Text 매핑 적용)
 @app.post("/analyze/audio", response_model=AnalysisResult)
 async def analyze_audio(
-    target: str = Form(..., description="Target Key (korean, read, bab)"),
+    target: str = Form(..., description="정답 텍스트 직접 입력 (예: 한국어, 볶음밥)"),
     file: UploadFile = File(...)
 ):
-    # 1. Key 검증 및 텍스트 변환
-    if target not in TARGET_TEXT_MAP:
-        raise HTTPException(400, detail=f"Unknown target: '{target}'. Available: {list(TARGET_TEXT_MAP.keys())}")
-    
-    real_target_text = TARGET_TEXT_MAP[target]
-
     # 2. 파일 저장 및 분석
     with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
         shutil.copyfileobj(file.file, tmp); tmp_path = tmp.name
     try:
-        res = process_audio_scoring(tmp_path, real_target_text)
+        res = process_audio_scoring(tmp_path, target)
         if res["status"] == "error": raise HTTPException(500, res["message"])
         
         # 3. 응답 생성 (Key와 실제 텍스트 모두 포함)
         return {
             "status": "success",
             "target_word": target,            # 클라이언트가 보낸 Key
-            "label_in_file": real_target_text, # 실제 채점된 한글 텍스트
+            "label_in_file": target, # 실제 채점된 한글 텍스트
             "score": res["score"],
             "passed": res["passed"],
             "recognized_text": res["recognized_text"],
