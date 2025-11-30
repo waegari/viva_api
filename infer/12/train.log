@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 다리미
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 8.1858
+[040] Loss: 4.2990
+[060] Loss: 2.2689
+[080] Loss: 1.1157
+[100] Loss: 0.5566
+[120] Loss: 0.3041
+[140] Loss: 0.1875
+[160] Loss: 0.1645
+[180] Loss: 0.1404
+[200] Loss: 0.1093
+[220] Loss: 0.1155
+[240] Loss: 0.1066
+[260] Loss: 0.1050
+[280] Loss: 0.0871
+[300] Loss: 0.0833
+[320] Loss: 0.0811
+[340] Loss: 0.0793
+[360] Loss: 0.0843
+[380] Loss: 0.0722
+[400] Loss: 0.0781
+[420] Loss: 0.0599
+[440] Loss: 0.0869
+[460] Loss: 0.0700
+[480] Loss: 0.0711
+[500] Loss: 0.0569
+[Done] Model saved to runs/all_oneword\oneword_다리미_neg

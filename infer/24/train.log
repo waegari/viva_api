@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 바다
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 13.4806
+[040] Loss: 8.3518
+[060] Loss: 5.1370
+[080] Loss: 3.0077
+[100] Loss: 1.7097
+[120] Loss: 0.9158
+[140] Loss: 0.4888
+[160] Loss: 0.2896
+[180] Loss: 0.1607
+[200] Loss: 0.1242
+[220] Loss: 0.0980
+[240] Loss: 0.0883
+[260] Loss: 0.0771
+[280] Loss: 0.0816
+[300] Loss: 0.0821
+[320] Loss: 0.0659
+[340] Loss: 0.0581
+[360] Loss: 0.0699
+[380] Loss: 0.0690
+[400] Loss: 0.0721
+[420] Loss: 0.0615
+[440] Loss: 0.0584
+[460] Loss: 0.0533
+[480] Loss: 0.0517
+[500] Loss: 0.0444
+[Done] Model saved to runs/all_oneword\oneword_바다_neg

@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 구두
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 42.4468
+[040] Loss: 32.5299
+[060] Loss: 24.8898
+[080] Loss: 18.7188
+[100] Loss: 13.8258
+[120] Loss: 10.0311
+[140] Loss: 7.1190
+[160] Loss: 4.9908
+[180] Loss: 3.4022
+[200] Loss: 2.2546
+[220] Loss: 1.4908
+[240] Loss: 0.9641
+[260] Loss: 0.6280
+[280] Loss: 0.3948
+[300] Loss: 0.2692
+[320] Loss: 0.1786
+[340] Loss: 0.1378
+[360] Loss: 0.1070
+[380] Loss: 0.0716
+[400] Loss: 0.0670
+[420] Loss: 0.0636
+[440] Loss: 0.0518
+[460] Loss: 0.0542
+[480] Loss: 0.0532
+[500] Loss: 0.0514
+[Done] Model saved to runs/all_oneword\oneword_구두_neg

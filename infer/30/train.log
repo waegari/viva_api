@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 부자
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 22.0333
+[040] Loss: 15.2341
+[060] Loss: 10.5376
+[080] Loss: 7.0454
+[100] Loss: 4.5709
+[120] Loss: 2.9025
+[140] Loss: 1.7393
+[160] Loss: 1.0742
+[180] Loss: 0.6285
+[200] Loss: 0.3994
+[220] Loss: 0.2524
+[240] Loss: 0.2096
+[260] Loss: 0.1504
+[280] Loss: 0.1183
+[300] Loss: 0.1171
+[320] Loss: 0.1127
+[340] Loss: 0.1107
+[360] Loss: 0.0963
+[380] Loss: 0.0932
+[400] Loss: 0.0893
+[420] Loss: 0.0918
+[440] Loss: 0.0982
+[460] Loss: 0.0835
+[480] Loss: 0.0939
+[500] Loss: 0.0788
+[Done] Model saved to runs/all_oneword\oneword_부자_neg

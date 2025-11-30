@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 두더지
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 8.2862
+[040] Loss: 4.3122
+[060] Loss: 2.2987
+[080] Loss: 1.1875
+[100] Loss: 0.5944
+[120] Loss: 0.3422
+[140] Loss: 0.1960
+[160] Loss: 0.1537
+[180] Loss: 0.1612
+[200] Loss: 0.1274
+[220] Loss: 0.1280
+[240] Loss: 0.1303
+[260] Loss: 0.1029
+[280] Loss: 0.0978
+[300] Loss: 0.0933
+[320] Loss: 0.0835
+[340] Loss: 0.0755
+[360] Loss: 0.0759
+[380] Loss: 0.0748
+[400] Loss: 0.0786
+[420] Loss: 0.0682
+[440] Loss: 0.0651
+[460] Loss: 0.0634
+[480] Loss: 0.0776
+[500] Loss: 0.0641
+[Done] Model saved to runs/all_oneword\oneword_두더지_neg

@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 바지
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 43.1842
+[040] Loss: 33.1793
+[060] Loss: 25.4756
+[080] Loss: 19.2321
+[100] Loss: 14.2633
+[120] Loss: 10.3394
+[140] Loss: 7.4226
+[160] Loss: 5.1906
+[180] Loss: 3.5375
+[200] Loss: 2.3721
+[220] Loss: 1.5674
+[240] Loss: 1.0335
+[260] Loss: 0.6484
+[280] Loss: 0.4422
+[300] Loss: 0.2865
+[320] Loss: 0.2071
+[340] Loss: 0.1539
+[360] Loss: 0.1238
+[380] Loss: 0.1053
+[400] Loss: 0.1014
+[420] Loss: 0.0731
+[440] Loss: 0.0642
+[460] Loss: 0.0615
+[480] Loss: 0.0696
+[500] Loss: 0.0626
+[Done] Model saved to runs/all_oneword\oneword_바지_neg

@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 고기
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 59.8492
+[040] Loss: 48.0203
+[060] Loss: 38.4297
+[080] Loss: 30.4234
+[100] Loss: 23.7403
+[120] Loss: 18.2840
+[140] Loss: 13.8765
+[160] Loss: 10.3566
+[180] Loss: 7.6113
+[200] Loss: 5.5174
+[220] Loss: 3.9394
+[240] Loss: 2.7900
+[260] Loss: 1.9182
+[280] Loss: 1.3163
+[300] Loss: 0.8792
+[320] Loss: 0.6381
+[340] Loss: 0.4208
+[360] Loss: 0.2748
+[380] Loss: 0.2066
+[400] Loss: 0.1492
+[420] Loss: 0.1246
+[440] Loss: 0.0865
+[460] Loss: 0.1053
+[480] Loss: 0.0703
+[500] Loss: 0.0717
+[Done] Model saved to runs/all_oneword\oneword_고기_neg

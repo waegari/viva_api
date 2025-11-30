@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 고추
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 6.7500
+[040] Loss: 3.1204
+[060] Loss: 1.5484
+[080] Loss: 0.7714
+[100] Loss: 0.3807
+[120] Loss: 0.2759
+[140] Loss: 0.1605
+[160] Loss: 0.1611
+[180] Loss: 0.1567
+[200] Loss: 0.1390
+[220] Loss: 0.1200
+[240] Loss: 0.1094
+[260] Loss: 0.1035
+[280] Loss: 0.1124
+[300] Loss: 0.1023
+[320] Loss: 0.0946
+[340] Loss: 0.0820
+[360] Loss: 0.0923
+[380] Loss: 0.0856
+[400] Loss: 0.0792
+[420] Loss: 0.0745
+[440] Loss: 0.0720
+[460] Loss: 0.0721
+[480] Loss: 0.0772
+[500] Loss: 0.0603
+[Done] Model saved to runs/all_oneword\oneword_고추_neg

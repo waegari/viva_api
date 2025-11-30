@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 시소
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 33.3262
+[040] Loss: 24.5982
+[060] Loss: 18.1037
+[080] Loss: 13.0571
+[100] Loss: 9.2004
+[120] Loss: 6.3187
+[140] Loss: 4.2389
+[160] Loss: 2.7846
+[180] Loss: 1.7851
+[200] Loss: 1.1265
+[220] Loss: 0.7038
+[240] Loss: 0.4312
+[260] Loss: 0.2826
+[280] Loss: 0.1888
+[300] Loss: 0.1527
+[320] Loss: 0.1147
+[340] Loss: 0.0931
+[360] Loss: 0.0720
+[380] Loss: 0.0750
+[400] Loss: 0.0910
+[420] Loss: 0.0588
+[440] Loss: 0.0627
+[460] Loss: 0.0614
+[480] Loss: 0.0549
+[500] Loss: 0.0620
+[Done] Model saved to runs/all_oneword\oneword_시소_neg

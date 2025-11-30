@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 새해
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 13.9524
+[040] Loss: 8.6845
+[060] Loss: 5.3458
+[080] Loss: 3.1565
+[100] Loss: 1.7542
+[120] Loss: 0.9496
+[140] Loss: 0.5074
+[160] Loss: 0.2747
+[180] Loss: 0.1728
+[200] Loss: 0.1088
+[220] Loss: 0.0946
+[240] Loss: 0.0870
+[260] Loss: 0.0772
+[280] Loss: 0.0757
+[300] Loss: 0.0749
+[320] Loss: 0.0730
+[340] Loss: 0.0651
+[360] Loss: 0.0631
+[380] Loss: 0.0630
+[400] Loss: 0.0599
+[420] Loss: 0.0529
+[440] Loss: 0.0547
+[460] Loss: 0.0543
+[480] Loss: 0.0459
+[500] Loss: 0.0495
+[Done] Model saved to runs/all_oneword\oneword_새해_neg

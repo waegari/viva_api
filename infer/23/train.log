@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 리어카
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 3.1578
+[040] Loss: 0.9310
+[060] Loss: 0.3977
+[080] Loss: 0.2479
+[100] Loss: 0.2219
+[120] Loss: 0.1712
+[140] Loss: 0.1665
+[160] Loss: 0.1538
+[180] Loss: 0.1372
+[200] Loss: 0.1294
+[220] Loss: 0.1031
+[240] Loss: 0.1178
+[260] Loss: 0.1150
+[280] Loss: 0.1106
+[300] Loss: 0.0964
+[320] Loss: 0.1011
+[340] Loss: 0.1177
+[360] Loss: 0.0892
+[380] Loss: 0.0879
+[400] Loss: 0.0729
+[420] Loss: 0.0671
+[440] Loss: 0.0688
+[460] Loss: 0.0717
+[480] Loss: 0.0722
+[500] Loss: 0.0603
+[Done] Model saved to runs/all_oneword\oneword_리어카_neg

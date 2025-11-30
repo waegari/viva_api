@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 기타
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 12.7846
+[040] Loss: 7.5590
+[060] Loss: 4.5489
+[080] Loss: 2.5950
+[100] Loss: 1.4290
+[120] Loss: 0.7531
+[140] Loss: 0.4357
+[160] Loss: 0.2673
+[180] Loss: 0.1671
+[200] Loss: 0.1269
+[220] Loss: 0.1109
+[240] Loss: 0.1137
+[260] Loss: 0.1058
+[280] Loss: 0.0941
+[300] Loss: 0.0826
+[320] Loss: 0.0817
+[340] Loss: 0.0815
+[360] Loss: 0.0774
+[380] Loss: 0.0682
+[400] Loss: 0.0768
+[420] Loss: 0.0696
+[440] Loss: 0.0602
+[460] Loss: 0.0634
+[480] Loss: 0.0642
+[500] Loss: 0.0694
+[Done] Model saved to runs/all_oneword\oneword_기타_neg

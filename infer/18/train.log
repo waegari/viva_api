@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 두부
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 12.9834
+[040] Loss: 7.7761
+[060] Loss: 4.6576
+[080] Loss: 2.6934
+[100] Loss: 1.4636
+[120] Loss: 0.7600
+[140] Loss: 0.4158
+[160] Loss: 0.2332
+[180] Loss: 0.1604
+[200] Loss: 0.1243
+[220] Loss: 0.0993
+[240] Loss: 0.0893
+[260] Loss: 0.0886
+[280] Loss: 0.0826
+[300] Loss: 0.0868
+[320] Loss: 0.0878
+[340] Loss: 0.0659
+[360] Loss: 0.0630
+[380] Loss: 0.0620
+[400] Loss: 0.0529
+[420] Loss: 0.0609
+[440] Loss: 0.0685
+[460] Loss: 0.0589
+[480] Loss: 0.0480
+[500] Loss: 0.0535
+[Done] Model saved to runs/all_oneword\oneword_두부_neg

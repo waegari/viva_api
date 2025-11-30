@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 도로
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 52.0285
+[040] Loss: 40.9614
+[060] Loss: 32.1534
+[080] Loss: 24.8451
+[100] Loss: 18.9190
+[120] Loss: 14.1630
+[140] Loss: 10.4154
+[160] Loss: 7.5332
+[180] Loss: 5.3676
+[200] Loss: 3.7376
+[220] Loss: 2.5467
+[240] Loss: 1.7266
+[260] Loss: 1.1489
+[280] Loss: 0.7531
+[300] Loss: 0.5147
+[320] Loss: 0.3303
+[340] Loss: 0.2140
+[360] Loss: 0.1675
+[380] Loss: 0.1222
+[400] Loss: 0.0807
+[420] Loss: 0.0716
+[440] Loss: 0.0550
+[460] Loss: 0.0510
+[480] Loss: 0.0463
+[500] Loss: 0.0427
+[Done] Model saved to runs/all_oneword\oneword_도로_neg

@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 다리
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 53.7697
+[040] Loss: 42.5431
+[060] Loss: 33.5306
+[080] Loss: 26.0610
+[100] Loss: 19.9558
+[120] Loss: 15.0271
+[140] Loss: 11.1353
+[160] Loss: 8.1198
+[180] Loss: 5.8144
+[200] Loss: 4.0966
+[220] Loss: 2.8440
+[240] Loss: 1.9162
+[260] Loss: 1.2874
+[280] Loss: 0.8727
+[300] Loss: 0.5612
+[320] Loss: 0.3891
+[340] Loss: 0.2556
+[360] Loss: 0.1866
+[380] Loss: 0.1346
+[400] Loss: 0.1072
+[420] Loss: 0.0887
+[440] Loss: 0.0780
+[460] Loss: 0.0592
+[480] Loss: 0.0648
+[500] Loss: 0.0561
+[Done] Model saved to runs/all_oneword\oneword_다리_neg

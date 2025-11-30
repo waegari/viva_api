@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 도마
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 11.4138
+[040] Loss: 6.6851
+[060] Loss: 3.9003
+[080] Loss: 2.1871
+[100] Loss: 1.2166
+[120] Loss: 0.6888
+[140] Loss: 0.3494
+[160] Loss: 0.2290
+[180] Loss: 0.1603
+[200] Loss: 0.1393
+[220] Loss: 0.1439
+[240] Loss: 0.1246
+[260] Loss: 0.1513
+[280] Loss: 0.1174
+[300] Loss: 0.1114
+[320] Loss: 0.0884
+[340] Loss: 0.1062
+[360] Loss: 0.0906
+[380] Loss: 0.0946
+[400] Loss: 0.0925
+[420] Loss: 0.0777
+[440] Loss: 0.0845
+[460] Loss: 0.0739
+[480] Loss: 0.0790
+[500] Loss: 0.0662
+[Done] Model saved to runs/all_oneword\oneword_도마_neg

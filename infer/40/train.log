@@ -1,0 +1,29 @@
+[Info] Loaded 4 refs. Label: 한국어
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 118 negative samples.
+[020] Loss: 108.3347
+[040] Loss: 92.1345
+[060] Loss: 78.0634
+[080] Loss: 65.6596
+[100] Loss: 54.7990
+[120] Loss: 45.3022
+[140] Loss: 37.1265
+[160] Loss: 30.1309
+[180] Loss: 24.2104
+[200] Loss: 19.2428
+[220] Loss: 15.1160
+[240] Loss: 11.7326
+[260] Loss: 9.0011
+[280] Loss: 6.8748
+[300] Loss: 5.1152
+[320] Loss: 3.7487
+[340] Loss: 2.7375
+[360] Loss: 1.9574
+[380] Loss: 1.3887
+[400] Loss: 0.9656
+[420] Loss: 0.6692
+[440] Loss: 0.4544
+[460] Loss: 0.3069
+[480] Loss: 0.2123
+[500] Loss: 0.1424
+[Done] Model saved to runs/all_oneword\oneword_한국어_neg

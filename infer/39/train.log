@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 읽어요
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 105.6110
+[040] Loss: 89.4862
+[060] Loss: 75.7357
+[080] Loss: 63.6872
+[100] Loss: 53.1026
+[120] Loss: 43.9071
+[140] Loss: 35.9861
+[160] Loss: 29.1984
+[180] Loss: 23.4478
+[200] Loss: 18.6436
+[220] Loss: 14.6534
+[240] Loss: 11.4142
+[260] Loss: 8.7593
+[280] Loss: 6.6525
+[300] Loss: 4.9954
+[320] Loss: 3.6912
+[340] Loss: 2.6986
+[360] Loss: 1.9497
+[380] Loss: 1.3763
+[400] Loss: 0.9955
+[420] Loss: 0.6936
+[440] Loss: 0.4660
+[460] Loss: 0.3354
+[480] Loss: 0.2392
+[500] Loss: 0.1680
+[Done] Model saved to runs/all_oneword\oneword_읽어요_neg

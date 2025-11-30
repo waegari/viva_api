@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 루비
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 28.5571
+[040] Loss: 20.6551
+[060] Loss: 14.8732
+[080] Loss: 10.4520
+[100] Loss: 7.1619
+[120] Loss: 4.7968
+[140] Loss: 3.1235
+[160] Loss: 1.9835
+[180] Loss: 1.2286
+[200] Loss: 0.8125
+[220] Loss: 0.4730
+[240] Loss: 0.3910
+[260] Loss: 0.2063
+[280] Loss: 0.1614
+[300] Loss: 0.1208
+[320] Loss: 0.0873
+[340] Loss: 0.0814
+[360] Loss: 0.0743
+[380] Loss: 0.0852
+[400] Loss: 0.0611
+[420] Loss: 0.0599
+[440] Loss: 0.0649
+[460] Loss: 0.0609
+[480] Loss: 0.0736
+[500] Loss: 0.0520
+[Done] Model saved to runs/all_oneword\oneword_루비_neg

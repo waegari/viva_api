@@ -1,0 +1,29 @@
+[Info] Loaded 4 refs. Label: 볶음밥
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 118 negative samples.
+[020] Loss: 124.5059
+[040] Loss: 107.0389
+[060] Loss: 91.8099
+[080] Loss: 78.2622
+[100] Loss: 66.2357
+[120] Loss: 55.6324
+[140] Loss: 46.3562
+[160] Loss: 38.2850
+[180] Loss: 31.3438
+[200] Loss: 25.4147
+[220] Loss: 20.3914
+[240] Loss: 16.1900
+[260] Loss: 12.7089
+[280] Loss: 9.8592
+[300] Loss: 7.5489
+[320] Loss: 5.6931
+[340] Loss: 4.2446
+[360] Loss: 3.1207
+[380] Loss: 2.2503
+[400] Loss: 1.6049
+[420] Loss: 1.1296
+[440] Loss: 0.7800
+[460] Loss: 0.5269
+[480] Loss: 0.3515
+[500] Loss: 0.2370
+[Done] Model saved to runs/all_oneword\oneword_볶음밥_neg

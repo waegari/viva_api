@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 비누
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 3.5650
+[040] Loss: 1.1698
+[060] Loss: 0.5244
+[080] Loss: 0.2730
+[100] Loss: 0.2120
+[120] Loss: 0.1752
+[140] Loss: 0.1862
+[160] Loss: 0.2080
+[180] Loss: 0.1782
+[200] Loss: 0.1696
+[220] Loss: 0.1441
+[240] Loss: 0.1395
+[260] Loss: 0.1553
+[280] Loss: 0.1108
+[300] Loss: 0.1188
+[320] Loss: 0.1293
+[340] Loss: 0.1044
+[360] Loss: 0.0989
+[380] Loss: 0.1048
+[400] Loss: 0.0989
+[420] Loss: 0.0909
+[440] Loss: 0.0834
+[460] Loss: 0.0818
+[480] Loss: 0.0867
+[500] Loss: 0.0682
+[Done] Model saved to runs/all_oneword\oneword_비누_neg

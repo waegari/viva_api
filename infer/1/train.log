@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 가수
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 7.7478
+[040] Loss: 3.9703
+[060] Loss: 2.0530
+[080] Loss: 1.0481
+[100] Loss: 0.5415
+[120] Loss: 0.2948
+[140] Loss: 0.1976
+[160] Loss: 0.1625
+[180] Loss: 0.1268
+[200] Loss: 0.1333
+[220] Loss: 0.1381
+[240] Loss: 0.1249
+[260] Loss: 0.1155
+[280] Loss: 0.1143
+[300] Loss: 0.0991
+[320] Loss: 0.1098
+[340] Loss: 0.0889
+[360] Loss: 0.1112
+[380] Loss: 0.1282
+[400] Loss: 0.0901
+[420] Loss: 0.0798
+[440] Loss: 0.0835
+[460] Loss: 0.0804
+[480] Loss: 0.0704
+[500] Loss: 0.0669
+[Done] Model saved to runs/all_oneword\oneword_가수_neg

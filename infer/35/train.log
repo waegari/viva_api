@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 수저
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 25.1073
+[040] Loss: 17.3898
+[060] Loss: 12.1438
+[080] Loss: 8.4838
+[100] Loss: 5.4861
+[120] Loss: 3.5223
+[140] Loss: 2.1980
+[160] Loss: 1.3607
+[180] Loss: 0.8047
+[200] Loss: 0.4869
+[220] Loss: 0.3058
+[240] Loss: 0.1904
+[260] Loss: 0.1359
+[280] Loss: 0.1088
+[300] Loss: 0.0820
+[320] Loss: 0.0950
+[340] Loss: 0.0743
+[360] Loss: 0.0606
+[380] Loss: 0.0653
+[400] Loss: 0.0703
+[420] Loss: 0.0560
+[440] Loss: 0.0553
+[460] Loss: 0.0563
+[480] Loss: 0.0549
+[500] Loss: 0.0562
+[Done] Model saved to runs/all_oneword\oneword_수저_neg

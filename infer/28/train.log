@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 보자기
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 8.7733
+[040] Loss: 4.5799
+[060] Loss: 2.4639
+[080] Loss: 1.2729
+[100] Loss: 0.6517
+[120] Loss: 0.3364
+[140] Loss: 0.2126
+[160] Loss: 0.1789
+[180] Loss: 0.1573
+[200] Loss: 0.1374
+[220] Loss: 0.1090
+[240] Loss: 0.0983
+[260] Loss: 0.1013
+[280] Loss: 0.1060
+[300] Loss: 0.0935
+[320] Loss: 0.0926
+[340] Loss: 0.0817
+[360] Loss: 0.0759
+[380] Loss: 0.0764
+[400] Loss: 0.0743
+[420] Loss: 0.0716
+[440] Loss: 0.0673
+[460] Loss: 0.0505
+[480] Loss: 0.0536
+[500] Loss: 0.0712
+[Done] Model saved to runs/all_oneword\oneword_보자기_neg

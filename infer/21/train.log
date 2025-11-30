@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 러시아
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 4.9409
+[040] Loss: 2.0320
+[060] Loss: 0.9842
+[080] Loss: 0.4371
+[100] Loss: 0.2608
+[120] Loss: 0.1886
+[140] Loss: 0.1528
+[160] Loss: 0.2003
+[180] Loss: 0.1353
+[200] Loss: 0.1134
+[220] Loss: 0.1221
+[240] Loss: 0.1285
+[260] Loss: 0.1005
+[280] Loss: 0.1048
+[300] Loss: 0.0856
+[320] Loss: 0.0866
+[340] Loss: 0.0897
+[360] Loss: 0.0957
+[380] Loss: 0.0849
+[400] Loss: 0.0774
+[420] Loss: 0.0722
+[440] Loss: 0.1020
+[460] Loss: 0.0711
+[480] Loss: 0.0565
+[500] Loss: 0.0564
+[Done] Model saved to runs/all_oneword\oneword_러시아_neg

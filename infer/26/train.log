@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 배추
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 13.7349
+[040] Loss: 8.3044
+[060] Loss: 5.1544
+[080] Loss: 3.0876
+[100] Loss: 1.7436
+[120] Loss: 0.9532
+[140] Loss: 0.5377
+[160] Loss: 0.3321
+[180] Loss: 0.1980
+[200] Loss: 0.1495
+[220] Loss: 0.1147
+[240] Loss: 0.1044
+[260] Loss: 0.1089
+[280] Loss: 0.0908
+[300] Loss: 0.1085
+[320] Loss: 0.0943
+[340] Loss: 0.0775
+[360] Loss: 0.1010
+[380] Loss: 0.0834
+[400] Loss: 0.0683
+[420] Loss: 0.0695
+[440] Loss: 0.0692
+[460] Loss: 0.0663
+[480] Loss: 0.0695
+[500] Loss: 0.0773
+[Done] Model saved to runs/all_oneword\oneword_배추_neg

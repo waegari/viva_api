@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 스키
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 11.4418
+[040] Loss: 6.5001
+[060] Loss: 3.7435
+[080] Loss: 2.0576
+[100] Loss: 1.0804
+[120] Loss: 0.5406
+[140] Loss: 0.3077
+[160] Loss: 0.2192
+[180] Loss: 0.1426
+[200] Loss: 0.1052
+[220] Loss: 0.1337
+[240] Loss: 0.1173
+[260] Loss: 0.0910
+[280] Loss: 0.0953
+[300] Loss: 0.0855
+[320] Loss: 0.0776
+[340] Loss: 0.0772
+[360] Loss: 0.0711
+[380] Loss: 0.0659
+[400] Loss: 0.0670
+[420] Loss: 0.0611
+[440] Loss: 0.0544
+[460] Loss: 0.0574
+[480] Loss: 0.0605
+[500] Loss: 0.0625
+[Done] Model saved to runs/all_oneword\oneword_스키_neg

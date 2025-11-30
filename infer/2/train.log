@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 가지
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 50.1956
+[040] Loss: 39.4153
+[060] Loss: 30.8628
+[080] Loss: 23.8657
+[100] Loss: 18.1188
+[120] Loss: 13.5421
+[140] Loss: 9.9466
+[160] Loss: 7.1709
+[180] Loss: 5.0727
+[200] Loss: 3.5290
+[220] Loss: 2.4155
+[240] Loss: 1.6224
+[260] Loss: 1.0855
+[280] Loss: 0.7042
+[300] Loss: 0.4756
+[320] Loss: 0.3198
+[340] Loss: 0.2206
+[360] Loss: 0.1425
+[380] Loss: 0.1143
+[400] Loss: 0.0961
+[420] Loss: 0.0940
+[440] Loss: 0.0718
+[460] Loss: 0.0620
+[480] Loss: 0.0595
+[500] Loss: 0.0504
+[Done] Model saved to runs/all_oneword\oneword_가지_neg

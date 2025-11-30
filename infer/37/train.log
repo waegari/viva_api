@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 스포츠
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 2.9199
+[040] Loss: 0.7297
+[060] Loss: 0.3268
+[080] Loss: 0.2070
+[100] Loss: 0.1655
+[120] Loss: 0.1665
+[140] Loss: 0.1577
+[160] Loss: 0.1453
+[180] Loss: 0.1315
+[200] Loss: 0.1267
+[220] Loss: 0.1053
+[240] Loss: 0.1074
+[260] Loss: 0.1110
+[280] Loss: 0.0989
+[300] Loss: 0.0777
+[320] Loss: 0.0900
+[340] Loss: 0.0862
+[360] Loss: 0.0786
+[380] Loss: 0.0756
+[400] Loss: 0.0759
+[420] Loss: 0.0611
+[440] Loss: 0.0541
+[460] Loss: 0.0596
+[480] Loss: 0.0604
+[500] Loss: 0.0627
+[Done] Model saved to runs/all_oneword\oneword_스포츠_neg

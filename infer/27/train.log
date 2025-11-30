@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 버터
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 22.7411
+[040] Loss: 15.6918
+[060] Loss: 10.8234
+[080] Loss: 7.2347
+[100] Loss: 4.7007
+[120] Loss: 2.9295
+[140] Loss: 1.7886
+[160] Loss: 1.0635
+[180] Loss: 0.6221
+[200] Loss: 0.3773
+[220] Loss: 0.2475
+[240] Loss: 0.1607
+[260] Loss: 0.1138
+[280] Loss: 0.0988
+[300] Loss: 0.0899
+[320] Loss: 0.0980
+[340] Loss: 0.0742
+[360] Loss: 0.0825
+[380] Loss: 0.0734
+[400] Loss: 0.0766
+[420] Loss: 0.0644
+[440] Loss: 0.0604
+[460] Loss: 0.0600
+[480] Loss: 0.0623
+[500] Loss: 0.0544
+[Done] Model saved to runs/all_oneword\oneword_버터_neg

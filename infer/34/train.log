@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 소파
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 15.9832
+[040] Loss: 10.2495
+[060] Loss: 6.5543
+[080] Loss: 4.0713
+[100] Loss: 2.3697
+[120] Loss: 1.3423
+[140] Loss: 0.7486
+[160] Loss: 0.4457
+[180] Loss: 0.2761
+[200] Loss: 0.1660
+[220] Loss: 0.1562
+[240] Loss: 0.1751
+[260] Loss: 0.1144
+[280] Loss: 0.1076
+[300] Loss: 0.0915
+[320] Loss: 0.0929
+[340] Loss: 0.0828
+[360] Loss: 0.0802
+[380] Loss: 0.0777
+[400] Loss: 0.0834
+[420] Loss: 0.0963
+[440] Loss: 0.0887
+[460] Loss: 0.0656
+[480] Loss: 0.0660
+[500] Loss: 0.0611
+[Done] Model saved to runs/all_oneword\oneword_소파_neg

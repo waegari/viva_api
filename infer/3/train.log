@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 개구리
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 3.6688
+[040] Loss: 1.3895
+[060] Loss: 0.5682
+[080] Loss: 0.2887
+[100] Loss: 0.1953
+[120] Loss: 0.1558
+[140] Loss: 0.1466
+[160] Loss: 0.1175
+[180] Loss: 0.1374
+[200] Loss: 0.1560
+[220] Loss: 0.1232
+[240] Loss: 0.1036
+[260] Loss: 0.1043
+[280] Loss: 0.0990
+[300] Loss: 0.0962
+[320] Loss: 0.1143
+[340] Loss: 0.0886
+[360] Loss: 0.0844
+[380] Loss: 0.0798
+[400] Loss: 0.0898
+[420] Loss: 0.0652
+[440] Loss: 0.0753
+[460] Loss: 0.0707
+[480] Loss: 0.0592
+[500] Loss: 0.0552
+[Done] Model saved to runs/all_oneword\oneword_개구리_neg

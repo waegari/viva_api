@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 도자기
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 8.0722
+[040] Loss: 4.1537
+[060] Loss: 2.1986
+[080] Loss: 1.1003
+[100] Loss: 0.5847
+[120] Loss: 0.2979
+[140] Loss: 0.1866
+[160] Loss: 0.1414
+[180] Loss: 0.1710
+[200] Loss: 0.1197
+[220] Loss: 0.1088
+[240] Loss: 0.1212
+[260] Loss: 0.1112
+[280] Loss: 0.1229
+[300] Loss: 0.0782
+[320] Loss: 0.0992
+[340] Loss: 0.0822
+[360] Loss: 0.0789
+[380] Loss: 0.0960
+[400] Loss: 0.0757
+[420] Loss: 0.0678
+[440] Loss: 0.0641
+[460] Loss: 0.0649
+[480] Loss: 0.0590
+[500] Loss: 0.0641
+[Done] Model saved to runs/all_oneword\oneword_도자기_neg

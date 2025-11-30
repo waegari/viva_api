@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 라디오
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 6.5919
+[040] Loss: 3.1445
+[060] Loss: 1.5612
+[080] Loss: 0.7398
+[100] Loss: 0.3924
+[120] Loss: 0.1977
+[140] Loss: 0.1710
+[160] Loss: 0.1647
+[180] Loss: 0.1321
+[200] Loss: 0.1039
+[220] Loss: 0.1122
+[240] Loss: 0.0955
+[260] Loss: 0.1003
+[280] Loss: 0.0906
+[300] Loss: 0.0796
+[320] Loss: 0.0875
+[340] Loss: 0.0714
+[360] Loss: 0.0776
+[380] Loss: 0.0705
+[400] Loss: 0.0625
+[420] Loss: 0.0704
+[440] Loss: 0.0646
+[460] Loss: 0.0576
+[480] Loss: 0.0583
+[500] Loss: 0.0572
+[Done] Model saved to runs/all_oneword\oneword_라디오_neg

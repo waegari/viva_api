@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 거미
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 15.5109
+[040] Loss: 9.6848
+[060] Loss: 6.1145
+[080] Loss: 3.7337
+[100] Loss: 2.1856
+[120] Loss: 1.2056
+[140] Loss: 0.6677
+[160] Loss: 0.3826
+[180] Loss: 0.2429
+[200] Loss: 0.1834
+[220] Loss: 0.1212
+[240] Loss: 0.1158
+[260] Loss: 0.1188
+[280] Loss: 0.0956
+[300] Loss: 0.0815
+[320] Loss: 0.0889
+[340] Loss: 0.0759
+[360] Loss: 0.0876
+[380] Loss: 0.0763
+[400] Loss: 0.0700
+[420] Loss: 0.0816
+[440] Loss: 0.0713
+[460] Loss: 0.0708
+[480] Loss: 0.0736
+[500] Loss: 0.0687
+[Done] Model saved to runs/all_oneword\oneword_거미_neg

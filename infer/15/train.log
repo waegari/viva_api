@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 도시
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 29.7758
+[040] Loss: 21.6039
+[060] Loss: 15.6310
+[080] Loss: 11.0298
+[100] Loss: 7.5928
+[120] Loss: 5.1094
+[140] Loss: 3.3420
+[160] Loss: 2.1225
+[180] Loss: 1.3279
+[200] Loss: 0.8383
+[220] Loss: 0.5189
+[240] Loss: 0.3113
+[260] Loss: 0.2071
+[280] Loss: 0.1565
+[300] Loss: 0.1161
+[320] Loss: 0.1045
+[340] Loss: 0.0837
+[360] Loss: 0.0752
+[380] Loss: 0.0770
+[400] Loss: 0.0713
+[420] Loss: 0.0730
+[440] Loss: 0.0584
+[460] Loss: 0.0567
+[480] Loss: 0.0503
+[500] Loss: 0.0562
+[Done] Model saved to runs/all_oneword\oneword_도시_neg

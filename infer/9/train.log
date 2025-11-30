@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 기차
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 27.9606
+[040] Loss: 19.9913
+[060] Loss: 14.2436
+[080] Loss: 9.8862
+[100] Loss: 6.6715
+[120] Loss: 4.3660
+[140] Loss: 2.8001
+[160] Loss: 1.7385
+[180] Loss: 1.0525
+[200] Loss: 0.6227
+[220] Loss: 0.3734
+[240] Loss: 0.2372
+[260] Loss: 0.1509
+[280] Loss: 0.1091
+[300] Loss: 0.0780
+[320] Loss: 0.0655
+[340] Loss: 0.0603
+[360] Loss: 0.0516
+[380] Loss: 0.0539
+[400] Loss: 0.0518
+[420] Loss: 0.0444
+[440] Loss: 0.0468
+[460] Loss: 0.0430
+[480] Loss: 0.0420
+[500] Loss: 0.0407
+[Done] Model saved to runs/all_oneword\oneword_기차_neg

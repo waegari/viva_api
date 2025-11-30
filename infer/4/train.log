@@ -1,0 +1,29 @@
+[Info] Loaded 3 refs. Label: 개미
+[Info] Detected 40 landmarks from data.
+[Info] Loaded 119 negative samples.
+[020] Loss: 11.2877
+[040] Loss: 6.6810
+[060] Loss: 3.8936
+[080] Loss: 2.1341
+[100] Loss: 1.1202
+[120] Loss: 0.5891
+[140] Loss: 0.3241
+[160] Loss: 0.1894
+[180] Loss: 0.1466
+[200] Loss: 0.1189
+[220] Loss: 0.1033
+[240] Loss: 0.1114
+[260] Loss: 0.0964
+[280] Loss: 0.0880
+[300] Loss: 0.0749
+[320] Loss: 0.0915
+[340] Loss: 0.0710
+[360] Loss: 0.0714
+[380] Loss: 0.0759
+[400] Loss: 0.0703
+[420] Loss: 0.0630
+[440] Loss: 0.0586
+[460] Loss: 0.0578
+[480] Loss: 0.0566
+[500] Loss: 0.0567
+[Done] Model saved to runs/all_oneword\oneword_개미_neg
